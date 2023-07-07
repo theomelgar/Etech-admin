@@ -28,7 +28,7 @@ export default function Nav() {
           </svg>
           Dashboard
         </Link>
-        <Link className={inactiveLink} href={"/"}>
+        <Link className={inactiveLink} href={"/products"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -45,7 +45,7 @@ export default function Nav() {
           </svg>
           Products
         </Link>
-        <Link className={inactiveLink} href={"/"}>
+        <Link className={inactiveLink} href={"/orders"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -62,7 +62,7 @@ export default function Nav() {
           </svg>
           Orders
         </Link>
-        <Link className={inactiveLink} href={"/"}>
+        <Link className={inactiveLink} href={"/settings"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
