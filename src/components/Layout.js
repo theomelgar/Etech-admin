@@ -1,5 +1,6 @@
 import { signIn, useSession } from "next-auth/react";
 import Nav from "./Navbar";
+import { Inter } from "next/font/google";
 
 export default function Layout({children}) {
   const { data: session } = useSession();

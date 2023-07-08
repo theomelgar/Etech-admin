@@ -1,24 +1,27 @@
 import Image from "next/image";
 import logo from "../assets/logo.png";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Nav() {
   const inactiveLink = "flex gap-1 p-1";
   const activeLink = inactiveLink + " bg-white text-blue-900 rounded-l-lg";
+  const router = useRouter();
+  const {pathname} = router
   return (
     <aside className="text-white p-4 pr-0">
       <Link href={"/"} className="flex justify-center mb-4 mr-4">
         <Image className="w-20 rounded" src={logo} alt="E"></Image>
       </Link>
       <nav className="flex-col gap-2">
-        <Link className={activeLink} href={"/"}>
+        <Link href={"/"} className={pathname === '/' ? activeLink : inactiveLink}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               stroke-linecap="round"
@@ -28,14 +31,14 @@ export default function Nav() {
           </svg>
           Dashboard
         </Link>
-        <Link className={inactiveLink} href={"/products"}>
+        <Link href={"/products"} className={pathname.includes('/products') ? activeLink : inactiveLink} >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               stroke-linecap="round"
@@ -45,14 +48,14 @@ export default function Nav() {
           </svg>
           Products
         </Link>
-        <Link className={inactiveLink} href={"/orders"}>
+        <Link href={"/orders"} className={pathname.includes('/orders') ? activeLink : inactiveLink} >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               stroke-linecap="round"
@@ -62,14 +65,14 @@ export default function Nav() {
           </svg>
           Orders
         </Link>
-        <Link className={inactiveLink} href={"/settings"}>
+        <Link href={"/settings"} className={pathname.includes('/settings') ? activeLink : inactiveLink} >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               stroke-linecap="round"
