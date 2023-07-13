@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CldUploadWidget } from "next-cloudinary";
 import Spinner from "./Spinner";
 import { ReactSortable } from "react-sortablejs";
@@ -11,6 +11,7 @@ export default function ProductForm({
   description: currentDescription,
   price: currentPrice,
   images: currentImage,
+  category: currentCategory
 }) {
   const [title, setTitle] = useState(currentTitle || "");
   const [description, setdDescription] = useState(currentDescription || "");
@@ -18,12 +19,21 @@ export default function ProductForm({
   const [goToProducts, setGoToProducts] = useState(false);
   const [images, setImages] = useState(currentImage || []);
   const [isSubmitting, setIsSubmitting] = useState(false); // New state
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState(currentCategory || "");
 
   const router = useRouter();
 
+  useEffect(() => {
+    axios.get("/api/categories").then((result) => {
+      setCategories(result.data);
+      console.log(result.data)
+    });
+  }, []);
+
   async function saveProduct(e) {
     e.preventDefault();
-    const data = { title, description, price, images };
+    const data = { title, description, price, images, category };
     console.log("enotru");
     if (_id) {
       await axios.put("/api/products", { ...data, _id });
@@ -54,7 +64,7 @@ export default function ProductForm({
   }
 
   function updateImagesOrder(images) {
-    setImages(images)
+    setImages(images);
   }
 
   return (
@@ -66,6 +76,14 @@ export default function ProductForm({
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <option value="">Uncategorized</option>
+
+        {categories.length > 0 &&
+          categories.map((category) => (
+            <option value={category._id}>{category.name}</option>
+          ))}
+      </select>
       <label>Photos</label>
       <div className="mb-2 flex gap-2">
         <label className="w-24 h-24 mb-3 text-center flex flex-col justify-center items-center text-sm gap-1 text-gray-500 rounded-lg bg-gray-200 cursor-pointer">
