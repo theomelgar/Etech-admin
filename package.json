@@ -26,6 +26,7 @@
     "react-sortablejs": "^6.1.4",
     "react-spinners": "^0.13.8",
     "sortablejs": "^1.15.0",
+    "sweetalert2": "^11.7.16",
     "tailwindcss": "3.3.2"
   }
 }
